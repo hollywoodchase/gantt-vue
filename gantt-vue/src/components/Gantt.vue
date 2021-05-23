@@ -150,7 +150,7 @@ div {
 
 <script>
 import { gantt } from "dhtmlx-gantt";
-// import moment from 'moment';
+import moment from 'moment';
 export default {
   name: "gantt",
   props: {
@@ -170,7 +170,6 @@ export default {
     gantt.config.duration_unit = "minute";
     gantt.config.duration_step = 1;
     gantt.config.scale_height = 75;
-    
 
     gantt.config.subscales = [
       { unit: "day", step: 1, date: "%j %F, %l" },
@@ -179,6 +178,21 @@ export default {
 
     gantt.init(this.$refs.gantt);
     gantt.config.start_date = new Date(2021, 2, 20);
+
+    const dates = [
+      "20-02-2021 03:45",
+      "2021-052/06:50:39",
+      "2021-052/06:50:55",
+      "2021-053/02:14:25",
+      "2021-054/03:20:59",
+      "2021-055/05:27:25",
+    ];
+
+    const newDates = dates.map((x) => x.split("-")[0] + " " + moment().dayOfYear(1));
+
+    console.log(newDates);
+    // moment().dayOfYear();
+
     gantt.parse({
       data: [
         {
@@ -192,7 +206,7 @@ export default {
         {
           id: 12,
           text: "DS26 --> MMS2_1",
-          start_date: "20-02-2021 03:45",
+          start_date: dates[0],
           duration: "1.35",
           parent: "11",
           progress: 1,
